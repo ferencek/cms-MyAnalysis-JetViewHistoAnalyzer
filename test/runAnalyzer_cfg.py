@@ -3,7 +3,7 @@ import FWCore.ParameterSet.Config as cms
 process = cms.Process("USER")
 
 process.options = cms.untracked.PSet(
-    wantSummary = cms.untracked.bool(False)
+    wantSummary = cms.untracked.bool(True)
 )
 
 process.load('FWCore.MessageService.MessageLogger_cfi')
@@ -31,9 +31,23 @@ process.generator = cms.EDFilter("Pythia8GeneratorFilter",
     comEnergy = cms.double(8000.0),
     crossSection = cms.untracked.double(1.0),
     maxEventsToPrint = cms.untracked.int32(1),
-    #reweightGen = cms.PSet(),
-    #reweightGenRap = cms.PSet(),
-    #reweightGenPtHatRap = cms.PSet(),
+    #reweightGen = cms.PSet(),       # flat in Pt
+    #reweightGenRap = cms.PSet(      # flat in eta
+       #yLabSigmaFunc = cms.string("15.44/pow(x,0.0253)-12.56"),
+       #yLabPower = cms.double(2.),
+       #yCMSigmaFunc = cms.string("5.45/pow(x+64.84,0.34)"),
+       #yCMPower = cms.double(2.),
+       #pTHatMin = cms.double(15.),
+       #pTHatMax = cms.double(3000.)
+    #),
+    #reweightGenPtHatRap = cms.PSet( # flat in Pt and eta
+       #yLabSigmaFunc = cms.string("15.44/pow(x,0.0253)-12.56"),
+       #yLabPower = cms.double(2.),
+       #yCMSigmaFunc = cms.string("5.45/pow(x+64.84,0.34)"),
+       #yCMPower = cms.double(2.),
+       #pTHatMin = cms.double(15.),
+       #pTHatMax = cms.double(3000.)
+    #),
 
     PythiaParameters = cms.PSet(
         processParameters = cms.vstring(
